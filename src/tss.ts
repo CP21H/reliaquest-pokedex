@@ -8,6 +8,12 @@ function useContext() {
         primary: '#FAFAFA',
       },
     },
+    li: {
+      '&:hover': {
+        color: '#838383ff',
+        cursor: 'pointer',
+      },
+    },
   };
 
   return { theme };

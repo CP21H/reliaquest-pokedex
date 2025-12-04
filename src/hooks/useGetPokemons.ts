@@ -106,6 +106,7 @@ export const useGetPokemons = (/* search?: string */): {
   };
 };
 
+// Detail-oriented variation oof useGetPokemons, using GET_POKEMON_DETAILS query
 export const useGetPokemonDetails = (
   id: string,
 ): {
@@ -120,6 +121,7 @@ export const useGetPokemonDetails = (
 
   const pokemon = data?.pokemon?.[0];
 
+  // early return if data does not return a pokemon
   if (!pokemon) {
     return { data: undefined, loading, error };
   }

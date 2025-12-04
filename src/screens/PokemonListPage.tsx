@@ -13,15 +13,19 @@ export const PokemonListPage = () => {
   const [search, setSearch] = React.useState('');
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedPokemon, setSelectedPokemon] = React.useState<Pokemon | null>(null);
+
+  // Routing
   const { id } = useParams(); // allows access to :id in dynamic routes
   const navigate = useNavigate();
 
+  // State/Data Collection for GET_POKEMON_DETAILS -- must be after selectedPokemon
   const {
     data: pokemonDetail,
     loading: detailLoading,
     error: detailError,
   } = useGetPokemonDetails(selectedPokemon?.id ?? '');
 
+  // Modal Handlers
   const showModal = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     setIsModalOpen(true);
@@ -73,9 +77,10 @@ export const PokemonListPage = () => {
   return (
     <div className={classes.root}>
       <div>
+        {/* Search Bar */}
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -83,7 +88,9 @@ export const PokemonListPage = () => {
       <ol>
         {filteredData?.map((d) => (
           <li key={d.id}>
+            {/* Deep-link route */}
             <Link to={`/list/pokemon/${d.id}`}>
+              {/* Ant-design Modal Leveraged */}
               <Button onClick={() => showModal(d)} size="large" type="primary" color="red">
                 <Flex gap="middle">
                   <img src={d.sprite} alt="" width={30} height={30} /> {d.name}
@@ -144,5 +151,6 @@ const useStyles = tss.create(({ theme }) => ({
   root: {
     color: theme.color.text.primary,
     li: theme.li,
+    input: theme.input,
   },
 }));

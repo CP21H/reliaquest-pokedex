@@ -15,6 +15,13 @@ function useContext() {
         cursor: 'pointer',
       },
     },
+    input: {
+      height: '25px',
+      border: 'none',
+      '&:focus': {
+        outline: 'none',
+      },
+    },
   };
 
   return { theme };

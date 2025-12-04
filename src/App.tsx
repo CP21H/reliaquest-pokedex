@@ -19,7 +19,8 @@ const App = () => (
       <Routes>
         <Route path="/" element={<LayoutWrapper />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/list" element={<PokemonListPage />} />
+          <Route path="/list/" element={<PokemonListPage />} />
+          <Route path="/list/pokemon/:id" element={<PokemonListPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

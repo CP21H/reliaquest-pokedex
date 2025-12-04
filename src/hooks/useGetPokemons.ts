@@ -9,7 +9,9 @@ export interface Pokemon {
 }
 
 export interface PokemonDetail extends Pokemon {
-  // Details
+  weight: string;
+  height: string;
+  stats?: string[];
 }
 
 export const GET_POKEMONS = gql`

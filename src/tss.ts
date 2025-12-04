@@ -9,6 +9,7 @@ function useContext() {
       },
     },
     li: {
+      marginBottom: 5,
       '&:hover': {
         color: '#838383ff',
         cursor: 'pointer',

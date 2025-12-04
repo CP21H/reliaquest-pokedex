@@ -5,7 +5,7 @@ function useContext() {
     color: {
       surface: '#000E1C',
       text: {
-        primary: '#FAFAFA',
+        primary: '#fafafaff',
       },
     },
     li: {

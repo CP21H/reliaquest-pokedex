@@ -46,7 +46,7 @@ export const GET_POKEMONS = gql`
 `;
 
 export const GET_POKEMON_DETAILS = gql`
-  query GetPokemonDetails($id: String!) {
+  query GetPokemonDetails($id: Int!) {
     pokemon(where: { id: { _eq: $id } }) {
       id
       pokemonspecy {
@@ -101,6 +101,39 @@ export const useGetPokemons = (/* search?: string */): {
           sprite: p.pokemonsprites?.[0].sprites,
         }),
       ) ?? [],
+    loading,
+    error,
+  };
+};
+
+export const useGetPokemonDetails = (
+  id: string,
+): {
+  data?: PokemonDetail;
+  loading: boolean;
+  error: any;
+} => {
+  const { data, loading, error } = useQuery<{ pokemon: any[] }>(GET_POKEMON_DETAILS, {
+    variables: { id },
+    skip: !id, // prevents running query when id is empty/undefined
+  });
+
+  const pokemon = data?.pokemon?.[0];
+
+  if (!pokemon) {
+    return { data: undefined, loading, error };
+  }
+
+  return {
+    data: {
+      id: String(pokemon.id),
+      name: pokemon.pokemonspecy?.pokemonspeciesnames?.[0]?.name,
+      types: pokemon.pokemontypes?.map((t: any) => t.type?.typenames?.[0]?.name),
+      sprite: pokemon.pokemonsprites?.[0]?.sprites,
+      weight: pokemon.weight?.toString(),
+      height: pokemon.height?.toString(),
+      stats: pokemon.pokemonstats?.map((s: any) => `${s.base_stat}`),
+    },
     loading,
     error,
   };
